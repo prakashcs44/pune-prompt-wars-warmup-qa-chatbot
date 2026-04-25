@@ -1,4 +1,4 @@
-const API_BASE = 'https://pune-prompt-wars-warmup-qa-chatbot.onrender.com/';
+const API_BASE = 'https://pune-prompt-wars-warmup-qa-chatbot.onrender.com';
 
 export interface ChatResponseData {
   response: string;
