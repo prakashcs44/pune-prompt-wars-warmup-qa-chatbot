@@ -1,5 +1,5 @@
 # Use a lightweight python image
-FROM python:3.11-slim as builder
+FROM python:3.12-slim as builder
 
 # Install uv
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
@@ -15,7 +15,7 @@ COPY uv.lock .
 RUN uv venv && uv sync --no-dev
 
 # Final stage
-FROM python:3.11-slim
+FROM python:3.12-slim
 
 WORKDIR /app
 
