@@ -1,4 +1,4 @@
-const API_BASE = (import.meta.env.VITE_API_BASE as string) || 'https://pune-prompt-wars-warmup-qa-chatbot.onrender.com';
+const API_BASE = (import.meta.env.VITE_API_BASE as string) || 'http://localhost:8000';
 
 export interface ChatResponseData {
   response: string;
