@@ -7,6 +7,32 @@ from typing import List, Optional
 from datetime import datetime
 
 
+# ── Auth ────────────────────────────────────────────────────────────────────────
+
+class UserSignup(BaseModel):
+    email: str
+    password: str
+
+class UserLogin(BaseModel):
+    email: str
+    password: str
+
+class UserOut(BaseModel):
+    id: str
+    email: str
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+class UserOnboarding(BaseModel):
+    age: int
+    profession: str
+    education_level: str
+    interests: List[str]
+    learning_goals: Optional[str] = None
+
+
 # ── Chat ────────────────────────────────────────────────────────────────────────
 
 class Attachment(BaseModel):
@@ -19,7 +45,6 @@ class ChatRequest(BaseModel):
     """Incoming chat message from the frontend."""
     message: str = Field(..., min_length=1, max_length=10_000, description="User message text")
     session_id: str = Field(..., min_length=1, max_length=100, description="Unique session identifier")
-    user_id: str = Field(..., min_length=1, max_length=100, description="Unique user identifier")
     attachments: Optional[List[Attachment]] = Field(default=None, description="Optional list of file contents")
 
 
@@ -59,6 +84,10 @@ class ScoreEntry(BaseModel):
 class LearnerProfile(BaseModel):
     """Persistent learner profile stored in Long-Term Memory."""
     user_id: str
+    age: Optional[int] = None
+    profession: Optional[str] = None
+    education_level: Optional[str] = None
+    learning_goals: Optional[str] = None
     pace: str = Field(default="medium", description="Learning pace: slow, medium, fast")
     expertise_level: str = Field(default="beginner", description="beginner, intermediate, advanced")
     interests: List[str] = Field(default_factory=list)

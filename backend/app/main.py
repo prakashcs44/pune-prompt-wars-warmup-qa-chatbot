@@ -18,7 +18,8 @@ from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
 from app.config import settings
-from app.routes import chat, sessions, health
+from app.routes import chat, sessions, health, auth, user
+from app.utils.auth import init_db
 
 
 # ── Logging ─────────────────────────────────────────────────────────────────────
@@ -34,6 +35,7 @@ logger = logging.getLogger("lumina")
 async def lifespan(app: FastAPI):
     logger.info("🚀 Lumina AI starting — model=%s", settings.openrouter_model)
     logger.info("📂 LTM storage path: %s", settings.ltm_storage_path)
+    init_db()
     yield
     logger.info("👋 Lumina AI shutting down")
 
@@ -60,6 +62,8 @@ app.add_middleware(
 )
 
 # ── Register Routers ────────────────────────────────────────────────────────────
+app.include_router(auth.router)
+app.include_router(user.router)
 app.include_router(chat.router)
 app.include_router(sessions.router)
 app.include_router(health.router)

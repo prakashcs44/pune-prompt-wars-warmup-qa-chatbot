@@ -26,7 +26,7 @@ The backend requires a server to run Python code. Cloud Storage buckets cannot r
       --source . \
       --region us-central1 \
       --allow-unauthenticated \
-      --set-env-vars="GOOGLE_API_KEY=YOUR_KEY_HERE,CORS_ORIGINS=*"
+      --set-env-vars="OPENROUTER_API_KEY=YOUR_KEY_HERE,OPENROUTER_MODEL=nvidia/nemotron-3-super-120b-a12b:free,CORS_ORIGINS=*"
     ```
 3.  **Save the Service URL:** After deployment, you will get a URL like `https://lumina-backend-xyz.a.run.app`. **Copy this.**
 
@@ -74,4 +74,4 @@ Your frontend will be accessible at:
 
 ## 📝 Troubleshooting
 - **CORS Error:** Ensure the `CORS_ORIGINS` environment variable in Cloud Run includes your bucket URL.
-- **API Key:** Don't forget to pass your `GOOGLE_API_KEY` during the `gcloud run deploy` command.
+- **API Key:** Don't forget to pass your `OPENROUTER_API_KEY` during the `gcloud run deploy` command.
