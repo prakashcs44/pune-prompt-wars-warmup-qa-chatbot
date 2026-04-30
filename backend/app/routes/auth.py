@@ -18,7 +18,7 @@ from app.utils.auth import (
 )
 from app.memory.long_term import ltm_store
 
-router = APIRouter(prefix="auth", tags=["Auth"])
+router = APIRouter(prefix="/auth", tags=["Auth"])
 
 
 @router.post("/signup", response_model=UserOut)

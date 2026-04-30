@@ -11,7 +11,7 @@ from app.utils.auth import get_current_user
 
 logger = logging.getLogger(__name__)
 
-router = APIRouter(prefix="chat", tags=["Chat"])
+router = APIRouter(prefix="/chat", tags=["Chat"])
 
 
 @router.post("", response_model=ChatResponse)

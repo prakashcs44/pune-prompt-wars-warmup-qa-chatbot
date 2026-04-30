@@ -10,7 +10,7 @@ from app.memory.short_term import stm_store
 from app.agents.factory import get_orchestrator
 from app.utils.auth import get_current_user
 
-router = APIRouter(prefix="sessions", tags=["Sessions"])
+router = APIRouter(prefix="/sessions", tags=["Sessions"])
 
 
 @router.get("", response_model=SessionListResponse)
