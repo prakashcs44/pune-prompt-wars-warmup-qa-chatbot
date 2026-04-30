@@ -10,7 +10,7 @@ from app.memory.long_term import ltm_store
 router = APIRouter(prefix="/user", tags=["User"])
 
 
-@router.post("/onboarding")
+@router.post("onboarding")
 async def onboarding(data: UserOnboarding, current_user: UserOut = Depends(get_current_user)):
     """
     Collect onboarding data and update the learner profile.
