@@ -1,4 +1,3 @@
-import React from 'react';
 import { Menu, LayoutDashboard, Plus } from 'lucide-react';
 
 interface ChatHeaderProps {

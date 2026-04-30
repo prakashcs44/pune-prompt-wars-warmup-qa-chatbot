@@ -1,4 +1,3 @@
-import React from 'react';
 import { Activity, ChevronRight, Zap, Award, LayoutDashboard } from 'lucide-react';
 import { type LearnerProfile } from '../../api';
 

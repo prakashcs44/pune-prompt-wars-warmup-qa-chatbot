@@ -1,4 +1,3 @@
-import React from 'react';
 import { GraduationCap, BookOpen, Brain, Activity, Target } from 'lucide-react';
 
 interface EmptyStateProps {

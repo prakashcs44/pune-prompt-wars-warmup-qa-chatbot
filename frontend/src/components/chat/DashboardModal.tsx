@@ -1,4 +1,3 @@
-import React from 'react';
 import { X, Activity, TrendingUp, Target, Sparkles, History, Brain, Award, MessageSquare, Zap } from 'lucide-react';
 import {
   XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,

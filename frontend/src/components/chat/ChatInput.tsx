@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import { Paperclip, X, Loader2, Send } from 'lucide-react';
 
 interface ChatInputProps {
