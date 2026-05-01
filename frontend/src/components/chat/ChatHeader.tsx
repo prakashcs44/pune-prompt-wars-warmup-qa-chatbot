@@ -20,7 +20,7 @@ export function ChatHeader({
   return (
     <header className="flex items-center justify-between px-6 py-4 border-b border-white/5 bg-[#020617]/80 backdrop-blur-xl shrink-0 z-10">
       <div className="flex items-center gap-4">
-        <button onClick={onToggleSidebar} className="p-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-900 border border-transparent hover:border-white/10 transition-all" title="Toggle Sidebar">
+        <button onClick={onToggleSidebar} className="p-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-900 border border-transparent hover:border-white/10 transition-all cursor-pointer" title="Toggle Sidebar">
           <Menu className="w-5 h-5" />
         </button>
         <div>
@@ -38,12 +38,12 @@ export function ChatHeader({
       <div className="flex items-center gap-2">
         <button
           onClick={onViewDashboard}
-          className="p-2.5 rounded-xl text-slate-400 hover:text-primary-400 hover:bg-primary-500/10 transition-all"
+          className="p-2.5 rounded-xl text-slate-400 hover:text-primary-400 hover:bg-primary-500/10 transition-all cursor-pointer"
           title="View Metrics"
         >
           <LayoutDashboard className="w-5 h-5" />
         </button>
-        <button onClick={onNewChat} className="hidden sm:flex items-center gap-2 px-4 py-2 text-sm font-bold text-white bg-slate-900 hover:bg-slate-800 border border-white/10 rounded-xl transition-all">
+        <button onClick={onNewChat} className="hidden sm:flex items-center gap-2 px-4 py-2 text-sm font-bold text-white bg-slate-900 hover:bg-slate-800 border border-white/10 rounded-xl transition-all cursor-pointer">
           <Plus className="w-4 h-4" />
           New Session
         </button>

@@ -60,14 +60,14 @@ export function Sidebar({
               </div>
               <span className="text-xl font-black tracking-tight">Lumina</span>
             </div>
-            <button onClick={() => setIsOpen(false)} className="p-2 rounded-xl text-slate-500 hover:text-white hover:bg-slate-800 transition-all" title="Close sidebar">
+            <button onClick={() => setIsOpen(false)} className="p-2 rounded-xl text-slate-500 hover:text-white hover:bg-slate-800 transition-all cursor-pointer" title="Close sidebar">
               <ChevronLeft className="w-5 h-5" />
             </button>
           </div>
 
           {/* New Chat */}
           <div className="px-4 pb-4 shrink-0">
-            <button onClick={onNewChat} className="w-full flex items-center gap-3 px-5 py-3.5 bg-primary-600 hover:bg-primary-500 text-white rounded-2xl transition-all text-sm font-bold shadow-lg shadow-primary-900/20 group">
+            <button onClick={onNewChat} className="w-full flex items-center gap-3 px-5 py-3.5 bg-primary-600 hover:bg-primary-500 text-white rounded-2xl transition-all text-sm font-bold shadow-lg shadow-primary-900/20 group cursor-pointer">
               <Plus className="w-5 h-5 transition-transform group-hover:rotate-90 duration-300" />
               New Learning Session
             </button>
@@ -89,13 +89,13 @@ export function Sidebar({
                 key={id}
                 onClick={() => onSwitchSession(id)}
                 className={`flex items-center gap-3 px-4 py-3 rounded-2xl cursor-pointer group transition-all duration-200 ${activeSessionId === id
-                    ? 'bg-slate-900 text-slate-100 shadow-inner border border-white/5'
-                    : 'text-slate-500 hover:bg-slate-900/50 hover:text-slate-300'
+                  ? 'bg-slate-900 text-slate-100 shadow-inner border border-white/5'
+                  : 'text-slate-500 hover:bg-slate-900/50 hover:text-slate-300'
                   }`}
               >
                 <MessageSquare className={`w-4 h-4 shrink-0 transition-colors ${activeSessionId === id ? 'text-primary-500' : ''}`} />
                 <span className="text-sm truncate flex-1 font-semibold tracking-tight">{getSessionTitle(id)}</span>
-                <button onClick={(e) => onDeleteSession(e, id)} className="opacity-0 group-hover:opacity-100 p-1.5 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-all" title="Archive">
+                <button onClick={(e) => onDeleteSession(e, id)} className="opacity-0 group-hover:opacity-100 p-1.5 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-all cursor-pointer" title="Archive">
                   <Trash2 className="w-4 h-4" />
                 </button>
               </div>
@@ -116,10 +116,10 @@ export function Sidebar({
                 </div>
               </div>
             </div>
-            
-            <button 
+
+            <button
               onClick={onLogout}
-              className="w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-slate-500 hover:text-red-400 hover:bg-red-500/10 transition-all text-sm font-bold group"
+              className="w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-slate-500 hover:text-red-400 hover:bg-red-500/10 transition-all text-sm font-bold group cursor-pointer"
             >
               <LogOut className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               Sign Out

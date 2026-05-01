@@ -33,7 +33,7 @@ export function DashboardModal({ profile, isOpen, onClose }: DashboardModalProps
       <div className="bg-slate-900 border border-slate-700 w-full max-w-5xl h-full max-h-[85vh] rounded-3xl shadow-2xl flex flex-col overflow-hidden relative">
 
         {/* Close Button */}
-        <button onClick={onClose} className="absolute top-6 right-6 p-2 rounded-full bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 transition-all z-10">
+        <button onClick={onClose} className="absolute top-6 right-6 p-2 rounded-full bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 transition-all z-10 cursor-pointer">
           <X className="w-6 h-6" />
         </button>
 

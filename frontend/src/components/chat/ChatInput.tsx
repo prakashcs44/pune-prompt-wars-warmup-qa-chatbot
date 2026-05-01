@@ -38,7 +38,7 @@ export function ChatInput({
               <Paperclip className="w-4 h-4 text-primary-400 shrink-0" />
             </div>
             <span className="truncate max-w-[250px] font-bold text-xs">{selectedFile.name}</span>
-            <button onClick={() => setSelectedFile(null)} className="ml-2 p-1.5 hover:bg-slate-800 rounded-full text-slate-500 hover:text-white transition-all">
+            <button onClick={() => setSelectedFile(null)} className="ml-2 p-1.5 hover:bg-slate-800 rounded-full text-slate-500 hover:text-white transition-all cursor-pointer">
               <X className="w-4 h-4" />
             </button>
           </div>
@@ -49,7 +49,7 @@ export function ChatInput({
           <div className="absolute -inset-1 bg-gradient-to-r from-primary-600 to-indigo-600 rounded-[22px] blur opacity-10 group-focus-within:opacity-25 transition-opacity duration-500"></div>
           <div className="relative flex items-end gap-3 bg-slate-900/90 border border-white/10 hover:border-white/20 focus-within:border-primary-500/50 focus-within:ring-4 focus-within:ring-primary-500/5 rounded-[20px] px-4 py-3.5 transition-all shadow-2xl backdrop-blur-xl">
             <input type="file" ref={fileInputRef} onChange={(e) => e.target.files?.[0] && setSelectedFile(e.target.files[0])} className="hidden" />
-            <button onClick={() => fileInputRef.current?.click()} className="p-2.5 text-slate-500 hover:text-primary-400 hover:bg-primary-500/10 rounded-xl transition-all shrink-0 mb-0.5" title="Attach context">
+            <button onClick={() => fileInputRef.current?.click()} className="p-2.5 text-slate-500 hover:text-primary-400 hover:bg-primary-500/10 rounded-xl transition-all shrink-0 mb-0.5 cursor-pointer" title="Attach context">
               <Paperclip className="w-6 h-6" />
             </button>
             <textarea
@@ -66,7 +66,7 @@ export function ChatInput({
             <button
               onClick={onSend}
               disabled={isLoading || (!input.trim() && !selectedFile)}
-              className="p-3.5 mb-0.5 bg-primary-600 hover:bg-primary-500 disabled:bg-slate-800 disabled:text-slate-600 rounded-[14px] transition-all flex items-center justify-center shrink-0 group shadow-lg shadow-primary-900/20 disabled:shadow-none"
+              className="p-3.5 mb-0.5 bg-primary-600 hover:bg-primary-500 disabled:bg-slate-800 disabled:text-slate-600 rounded-[14px] transition-all flex items-center justify-center shrink-0 group shadow-lg shadow-primary-900/20 disabled:shadow-none cursor-pointer"
             >
               {isLoading ? (
                 <Loader2 className="w-6 h-6 animate-spin text-white" />
