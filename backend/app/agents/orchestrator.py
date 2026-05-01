@@ -10,6 +10,7 @@ This is the core intelligence layer. It builds a LangGraph state graph with:
 
 import logging
 import uuid
+import json
 from typing import Annotated, List, TypedDict, Sequence, Optional
 
 from langgraph.graph import StateGraph, START, END
@@ -104,10 +105,17 @@ class LuminaOrchestrator:
         response = await self.llm_with_tools.ainvoke(messages)
         return {"messages": [response]}
 
-    def _ltm_update(self, state: AgentState) -> dict:
-        """After a response, increment message count in LTM."""
+    async def _ltm_update(self, state: AgentState) -> dict:
+        """After a response, increment message count in LTM and refresh prompts if needed."""
         user_id = state.get("user_id", "anonymous")
         ltm_store.increment_messages(user_id)
+        
+        # Refresh suggested prompts every 5 messages to keep them relevant to recent history
+        profile = ltm_store.get_profile(user_id)
+        if profile.total_messages % 5 == 0:
+            logger.info("Refreshing suggested prompts for user %s", user_id)
+            await self.generate_suggested_prompts(user_id)
+            
         return {}
 
     # ── Conditional Routing ─────────────────────────────────────
@@ -203,3 +211,44 @@ class LuminaOrchestrator:
                 "id": getattr(msg, "id", str(uuid.uuid4()))
             })
         return history
+
+    async def generate_suggested_prompts(self, user_id: str) -> List[str]:
+        """
+        Dynamically generate personalized suggested prompts based on the learner's profile.
+        """
+        profile = ltm_store.get_profile(user_id)
+        
+        # Build a prompt for the LLM to generate suggestions
+        prompt = (
+            "You are a helpful learning coach. Based on the user's profile below, generate 3-4 specific, "
+            "engaging 'suggested prompts' or questions the user could ask to start their next learning session.\n\n"
+            f"User Profile:\n"
+            f"- Profession: {profile.profession or 'Not specified'}\n"
+            f"- Education: {profile.education_level or 'Not specified'}\n"
+            f"- Interests: {', '.join(profile.interests) or 'None'}\n"
+            f"- Learning Goals: {profile.learning_goals or 'General knowledge'}\n"
+            f"- Level: {profile.expertise_level}\n"
+            f"- Topics Mastered: {', '.join(profile.topics_completed) or 'None yet'}\n"
+            f"- Stuck Points: {', '.join(profile.stuck_points) or 'None'}\n\n"
+            "Return ONLY a JSON list of strings. Example: ['How does X work in the context of Y?', 'Can you explain Z?']"
+        )
+
+        try:
+            response = await self.llm.ainvoke([HumanMessage(content=prompt)])
+            content = response.content
+            
+            # Basic parsing of the JSON response
+            if "[" in content and "]" in content:
+                start = content.find("[")
+                end = content.rfind("]") + 1
+                suggested = json.loads(content[start:end])
+                
+                # Store in LTM
+                ltm_store.update_profile(user_id, suggested_prompts=suggested)
+                return suggested
+        except Exception as e:
+            logger.error("Failed to generate suggested prompts: %s", e)
+            
+        # Fallback prompts if generation fails
+        fallback = ["How can I get started with my learning goals?", "Tell me something interesting about my interests."]
+        return fallback

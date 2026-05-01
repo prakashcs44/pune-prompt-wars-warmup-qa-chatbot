@@ -131,8 +131,8 @@ export const ChatInterface: React.FC = () => {
     }
   };
 
-  const handleSend = async (overrideMsg?: string) => {
-    const msgText = overrideMsg ?? input.trim();
+  const handleSend = async (overrideMsg?: any) => {
+    const msgText = typeof overrideMsg === 'string' ? overrideMsg : input.trim();
     if ((!msgText && !selectedFile) || isLoading) return;
 
     let content = msgText;
@@ -198,10 +198,11 @@ export const ChatInterface: React.FC = () => {
       fetchProfile().then(setProfile).catch(() => { });
       fetchSessions().then(d => setServerSessions(d.sessions)).catch(() => { });
       setBackendOnline(true);
-    } catch {
+    } catch (err: any) {
+      console.error("Chat Error:", err);
       const errMsg: Message = {
         id: uid(), role: 'assistant',
-        content: "⚠️ Could not reach the server. Make sure the backend is running on port 8000.",
+        content: "⚠️ Something went wrong. Please try again.",
         timestamp: new Date(),
       };
       setSessions(prev => {
@@ -220,7 +221,10 @@ export const ChatInterface: React.FC = () => {
     if (server && server.title !== 'New Chat') return server.title;
     const msgs = sessions.get(id);
     const firstUserMsg = msgs?.find(m => m.role === 'user');
-    if (firstUserMsg) return firstUserMsg.content.slice(0, 40) + (firstUserMsg.content.length > 40 ? '…' : '');
+    if (firstUserMsg) {
+      const content = typeof firstUserMsg.content === 'string' ? firstUserMsg.content : '';
+      return content.slice(0, 40) + (content.length > 40 ? '…' : '');
+    }
     return 'New Chat';
   };
 
@@ -267,6 +271,7 @@ export const ChatInterface: React.FC = () => {
         <MessageList
           messages={activeMessages}
           isLoading={isLoading}
+          suggestedPrompts={profile?.suggested_prompts}
           onEmptyAction={(text) => {
             setInput(text);
           }}

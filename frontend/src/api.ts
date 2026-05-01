@@ -25,6 +25,7 @@ export interface LearnerProfile {
   pace: string;
   expertise_level: string;
   interests: string[];
+  suggested_prompts: string[];
   stuck_points: string[];
   understanding_score: number;
   topics_completed: string[];

@@ -16,6 +16,8 @@ load_dotenv()
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
+import os
+from logging.handlers import RotatingFileHandler
 
 from app.config import settings
 from app.routes import chat, sessions, health, auth, user
@@ -23,9 +25,16 @@ from app.utils.auth import init_db
 
 
 # ── Logging ─────────────────────────────────────────────────────────────────────
+# Ensure logs directory exists
+os.makedirs("logs", exist_ok=True)
+
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s | %(levelname)-8s | %(name)s | %(message)s",
+    handlers=[
+        logging.StreamHandler(),  # Console
+        RotatingFileHandler("logs/lumina.log", maxBytes=10*1024*1024, backupCount=5)  # File (10MB rot)
+    ]
 )
 logger = logging.getLogger("lumina")
 

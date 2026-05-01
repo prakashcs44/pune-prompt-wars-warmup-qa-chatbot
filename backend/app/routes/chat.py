@@ -37,4 +37,4 @@ async def send_message(request: ChatRequest, current_user: UserOut = Depends(get
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
         logger.exception("Chat error for user=%s session=%s", current_user.id, request.session_id)
-        raise HTTPException(status_code=500, detail=f"Internal error: {str(e)}")
+        raise HTTPException(status_code=500, detail="Something went wrong while processing your request.")

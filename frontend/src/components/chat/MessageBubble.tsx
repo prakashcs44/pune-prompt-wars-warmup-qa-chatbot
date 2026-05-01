@@ -14,7 +14,8 @@ interface MessageBubbleProps {
 export function MessageBubble({ message }: MessageBubbleProps) {
   const isUser = message.role === 'user';
 
-  const renderContent = (text: string) => {
+  const renderContent = (text: any) => {
+    if (typeof text !== 'string') return null;
     return text.split('\n').map((line, i) => {
       if (!line.trim()) return <br key={i} />;
       const parts = line.split(/\*\*(.*?)\*\*/g);

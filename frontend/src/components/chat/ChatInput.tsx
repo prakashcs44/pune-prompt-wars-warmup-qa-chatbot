@@ -64,7 +64,7 @@ export function ChatInput({
               className="flex-1 bg-transparent border-none outline-none resize-none min-h-[48px] max-h-48 py-3 text-[15px] font-medium text-slate-100 placeholder:text-slate-600 leading-relaxed"
             />
             <button
-              onClick={onSend}
+              onClick={() => onSend()}
               disabled={isLoading || (!input.trim() && !selectedFile)}
               className="p-3.5 mb-0.5 bg-primary-600 hover:bg-primary-500 disabled:bg-slate-800 disabled:text-slate-600 rounded-[14px] transition-all flex items-center justify-center shrink-0 group shadow-lg shadow-primary-900/20 disabled:shadow-none cursor-pointer"
             >

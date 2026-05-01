@@ -91,6 +91,7 @@ class LearnerProfile(BaseModel):
     pace: str = Field(default="medium", description="Learning pace: slow, medium, fast")
     expertise_level: str = Field(default="beginner", description="beginner, intermediate, advanced")
     interests: List[str] = Field(default_factory=list)
+    suggested_prompts: List[str] = Field(default_factory=list, description="Dynamically generated prompt suggestions")
     stuck_points: List[str] = Field(default_factory=list)
     understanding_score: float = Field(default=0.5, ge=0.0, le=1.0)
     topics_completed: List[str] = Field(default_factory=list)
